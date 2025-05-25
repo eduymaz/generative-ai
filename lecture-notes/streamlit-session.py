@@ -2,7 +2,7 @@
 
 st.session_state.mesaj = "Bilgilendirme mesajı" # .mesaj bizim eklediğimiz kısımdır
 st.session_state.yil = 2025
-st.session_state["Kullanici Adi"] = "Miuul"
+st.session_state["Kullanici Adi"] = "Deneme"
 gunler = ["Pazartesi", "Sali", "Carsamba", "Persembe", "Cuma"]
 st.session_state.liste = gunler
  
