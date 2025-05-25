@@ -2,7 +2,7 @@
 
 Bu proje, Streamlit ile geliştirilmiş interaktif bir müşteri segmentasyonu ve kampanya öneri panelidir.
 
-## Özellikler
+## 🎁 Özellikler
 - Müşteri verilerini analiz etme ve segmentlere ayırma (K-Means)
 - Elbow yöntemi ile optimum küme sayısı seçimi
 - Filtrelenebilir müşteri tablosu (yaş, cinsiyet, harcama, segment)
@@ -11,7 +11,7 @@ Bu proje, Streamlit ile geliştirilmiş interaktif bir müşteri segmentasyonu v
 - Müşteri detayları ve segment bazlı kampanya önerileri
 - Yeni müşteri ekleme, mevcut müşteriye alışveriş ekleme, müşteri silme
 
-## Kullanım
+## 💻 Kullanım
 1. Gerekli kütüphaneleri yükleyin:
    ```bash
    pip install -r requirements.txt
@@ -22,11 +22,11 @@ Bu proje, Streamlit ile geliştirilmiş interaktif bir müşteri segmentasyonu v
    ```
 3. Panel üzerinden müşteri verilerini analiz edin, yeni müşteri ekleyin veya silin.
 
-## Dosyalar
+## 🗃️ Dosyalar
 - `app.py`: Streamlit uygulaması
 - `customers.csv`: Örnek müşteri verisi
 - `requirements.txt`: Gerekli Python paketleri
 
-## Not
+## 🪧 Not
 - Tüm ekleme/silme işlemleri doğrudan `customers.csv` dosyasına yansır.
 - Proje eğitim ve demo amaçlıdır.
