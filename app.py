@@ -16,7 +16,7 @@ st.title("Müşteri Segmentasyonu ve Kişiselleştirilmiş Kampanya Paneli")
 logo = Image.open("logo.jpg")
 st.sidebar.image(logo, use_container_width=True)
 
-# --- Segmentasyon için veri hazırlama ---
+# --- Data Preparation for Segmentation  ---
 X = df[["total_spent", "num_transactions"]]
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
@@ -39,12 +39,12 @@ def plot_elbow(X):
 with st.expander("Elbow Yöntemi ile Küme Sayısı Seçimi"):
     plot_elbow(X_scaled)
 
-# Küme sayısı seçimi (varsayılan 4)
+# Elbow (default 4)
 n_clusters = st.sidebar.slider("Küme (Segment) Sayısı", 2, 8, 4)
 kmeans = KMeans(n_clusters=n_clusters, random_state=42)
 df['segment'] = kmeans.fit_predict(X_scaled)
 
-# --- Sidebar Filtreler ---
+# --- Sidebar Filters ---
 min_age, max_age = int(df.age.min()), int(df.age.max())
 age_range = st.sidebar.slider("Yaş Aralığı", min_age, max_age, (min_age, max_age))
 gender = st.sidebar.multiselect("Cinsiyet", options=df.gender.unique(), default=list(df.gender.unique()))
@@ -52,7 +52,7 @@ spend_min, spend_max = int(df.total_spent.min()), int(df.total_spent.max())
 spend_range = st.sidebar.slider("Harcama Aralığı", spend_min, spend_max, (spend_min, spend_max))
 segment_options = st.sidebar.multiselect("Segment Seçimi", options=sorted(df.segment.unique()), default=list(sorted(df.segment.unique())))
 
-# --- Filtreleme ---
+# --- Filtration ---
 filtered = df[
     (df.age.between(*age_range)) &
     (df.gender.isin(gender)) &
@@ -63,7 +63,7 @@ filtered = df[
 st.subheader("Filtrelenmiş Müşteri Tablosu")
 st.dataframe(filtered)
 
-# --- Görselleştirmeler ---
+# --- Visualization ---
 col1, col2 = st.columns(2)
 
 with col1:
@@ -90,13 +90,13 @@ plt.yticks(fontsize=8)
 fig3.tight_layout()
 st.pyplot(fig3)
 
-# --- Müşteri Detay ve Kampanya Önerisi ---
+# --- Customer Detail and Campaign Recommendation ---
 st.subheader("Müşteri Detayları ve Kampanya Önerisi")
 selected_customer = st.selectbox("Bir müşteri seçin", filtered['name'])
 customer_row = filtered[filtered['name'] == selected_customer].iloc[0]
 st.write(customer_row)
 
-# Basit kampanya öneri mantığı
+# Simple campaign proposal logic
 segment_campaigns = {
     0: "%10 indirim kuponu!",
     1: "Ücretsiz kargo fırsatı!",
@@ -110,7 +110,7 @@ segment_campaigns = {
 campaign = segment_campaigns.get(customer_row['segment'], "Özel kampanya!")
 st.info(f"Önerilen Kampanya: {campaign}")
 
-# --- Sidebar: Yeni Müşteri Ekle ---
+# --- Sidebar: New customer add ---
 st.sidebar.markdown("---")
 st.sidebar.header("Yeni Müşteri Ekle")
 if st.sidebar.checkbox("Yeni müşteri ekle" ):
@@ -141,7 +141,7 @@ if st.sidebar.checkbox("Yeni müşteri ekle" ):
             # Refresh olmadan güncel tabloyu göster
             st.session_state['df'] = df
 
-# --- Sidebar: Mevcut Müşteriye Yeni Alışveriş Ekle ---
+# --- Sidebar: Add New Purchase to Existing Customer ---
 st.sidebar.markdown("---")
 st.sidebar.header("Mevcut Müşteriye Yeni Alışveriş Ekle")
 if st.sidebar.checkbox("Yeni alışveriş ekle"):
@@ -161,7 +161,7 @@ if st.sidebar.checkbox("Yeni alışveriş ekle"):
             st.success(f"{customer_name} için yeni alışveriş eklendi.")
             st.session_state['df'] = df
 
-# --- Sidebar: Müşteri Sil ---
+# --- Sidebar: Remove Customer ---
 st.sidebar.markdown("---")
 st.sidebar.header("Müşteri Sil")
 if st.sidebar.checkbox("Müşteri sil" ):
@@ -175,6 +175,6 @@ if st.sidebar.checkbox("Müşteri sil" ):
             st.success(f"{del_customer} başarıyla silindi.")
             st.session_state['df'] = df
 
-# --- DataFrame güncelleme ---
+# --- DataFrame update ---
 if 'df' in st.session_state:
     df = st.session_state['df']
