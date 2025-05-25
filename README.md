@@ -1,4 +1,4 @@
-# Müşteri Segmentasyonu ve Kişiselleştirilmiş Kampanya Paneli
+# 📚 Müşteri Segmentasyonu ve Kişiselleştirilmiş Kampanya Paneli
 
 Bu proje, Streamlit ile geliştirilmiş interaktif bir müşteri segmentasyonu ve kampanya öneri panelidir.
 
