@@ -24,6 +24,7 @@ Bu proje, Streamlit ile geliştirilmiş interaktif bir müşteri segmentasyonu v
 
 ## 🗃️ Dosyalar
 - `app.py`: Streamlit uygulaması
+- `makeadata.py`: Örnek müşteri verisinin oluşturulması
 - `customers.csv`: Örnek müşteri verisi
 - `requirements.txt`: Gerekli Python paketleri
 
