@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from PIL import Image
 
-# Veri yükleme
+# Data Upload
 df = pd.read_csv("customers.csv")
 
 st.title("Müşteri Segmentasyonu ve Kişiselleştirilmiş Kampanya Paneli")
