@@ -13,7 +13,7 @@ client = anthropic.Anthropic(
 def generate_response(prompt):
 
     AI_Response = client.beta.messages.create(
-        model = "claude-2.1",
+        model = "claude-3.7",
         temperature=0,
         max_tokens=256,
         messages=[
