@@ -27,8 +27,8 @@ print("*"*100)
 AI_Response = replicate.run(
     "mistralai/mixtral-8x7b-instruct-v0.1:7b3212fbaf88310cfef07a061ce94224e82efc8403c26fc67e8f6c065de51f21",
         input = {
-        "temperature":0.5,
-        "max_new_tokens": 256,
+        "temperature":0.7,
+        "max_new_tokens": 300,
         "prompt": prompt,
         "debug": False
     }
