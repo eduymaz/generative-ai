@@ -6,7 +6,7 @@ Bu proje, farklı LLM (büyük dil modeli) sağlayıcıları ile çalışan, Str
 
 - Streamlit arayüzü ile kolay kullanım
 - .env dosyası ile API anahtarı yönetimi
-- OpenAI, Cohere, Anthropic, Google Gemini gibi farklı sağlayıcılarla çalışma desteği
+- OpenAI, Cohere, Anthropic, Google Gemini gibi farklı sağlayıcılarla çalışma desteği (burada sadece Cohere kullanımı sunulmuştur)
 
 ## Kurulum
 
