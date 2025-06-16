@@ -4,6 +4,7 @@ from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.embeddings import CohereEmbeddings # FOR EMBEDDING
 import os
 from dotenv import load_dotenv
 
@@ -11,10 +12,11 @@ load_dotenv()
 
 my_key_openai = os.getenv("openai_apikey")
 my_key_google = os.getenv("google_apikey")
+my_key_cohere = os.getenv("cohere_apikey")
 
 llm_gemini = ChatGoogleGenerativeAI(goole_api_key=my_key_google, model = "gemini-pro")
-embedding = OpenAIEmbedding(api_key=my_key_openai)
-
+# embedding = OpenAIEmbedding(api_key=my_key_openai)
+embeddings = CohereEmbeddings(cohere_api_key=my_key_cohere, model="embed-multilingual") # dile göre model değişmeli örn. Eng için -> embed-english-v3.0
 
 def ask_gemini(prompt):
     AI_Response = llm_gemini.invoke(prompt)
