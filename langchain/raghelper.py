@@ -5,6 +5,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import CohereEmbeddings # FOR EMBEDDING
+from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings #for hugging face
 import os
 from dotenv import load_dotenv
 
@@ -13,10 +14,17 @@ load_dotenv()
 my_key_openai = os.getenv("openai_apikey")
 my_key_google = os.getenv("google_apikey")
 my_key_cohere = os.getenv("cohere_apikey")
+my_key_hf = os.getenv("huggingface_access_token") # repo to be "read"
 
 llm_gemini = ChatGoogleGenerativeAI(goole_api_key=my_key_google, model = "gemini-pro")
 # embedding = OpenAIEmbedding(api_key=my_key_openai)
-embeddings = CohereEmbeddings(cohere_api_key=my_key_cohere, model="embed-multilingual") # dile göre model değişmeli örn. Eng için -> embed-english-v3.0
+# embeddings = CohereEmbeddings(cohere_api_key=my_key_cohere, model="embed-multilingual") # dile göre model değişmeli örn. Eng için -> embed-english-v3.0
+embeddings = HuggingFaceInferenceAPIEmbeddings(
+    api_key=my_key_hf,
+    model_name="sentence-transformers/all-MiniLM-16-v2"
+)
+
+
 
 def ask_gemini(prompt):
     AI_Response = llm_gemini.invoke(prompt)
