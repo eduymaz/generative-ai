@@ -101,7 +101,7 @@ if prompt := st.chat_input(placeholder="Mesajınızı yazınız"):
         st.info("🧠 Düşünce Zinciri İşletiliyor...")
         st_callback = StreamlitCallbackHandler(st.container())
 
-        executor = configure_agent(selected_llm=selected_llm, selected_search_engine=selected_search_engine)
+        executor = configure_agent(selected_llm=selected_llm, selected_search_engine=selected_search_engine), selected_image_generator=selected_image_generator
 
         AI_Response = executor.invoke(
             {"input": st.session_state.messages},
