@@ -6,6 +6,9 @@ from langchain_communnity.tools.tavil_search import TavilySearchResults
 from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 import streamlit as st
+import customtools
+
+
 import os 
 from dotenv import load_dotenv
 
@@ -32,10 +35,16 @@ def configure_agent(selected_llm, selected_search_engine, selected_image_generat
     elif selected_llm == "Claude-2.1":
         llm = llm_claude
 
+
+#TODO
+    selected_image_generator = customtools.get_tool(selected_image_generator=selected_image_generator)
+    web_scraping_tool = customtools.get_web_tool()
+
     if selected_search_engine == "DuckDuckGo":
         tools = load_tools(["ddg-search"])
+        tools.extend([image_generator_tool, web_scraping_tool])
     elif selected_search_engine == "Tavily":
-        tools = [TavilySearchResults(max_results=1)]
+        tools = [TavilySearchResults(max_results=1), image_generator_tool, web_scraping_tool]
 
     agent = create_react_agent(llm=llm, tools=tools, prompt=agent_prompt)
     agent_executer = AgentExecuter(agent=agent, tools=tools, verbose=True)
